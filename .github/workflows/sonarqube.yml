@@ -18,11 +18,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    # Step 2: Set up JDK 17 (Java 17)
+    # Step 2: Set up JDK 17 (Java 17) with a specific distribution
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
+        distribution: 'temurin'  # Choose the Java distribution (e.g., 'temurin', 'zulu', etc.)
 
     # Step 3: Install SonarScanner and run the scan
     - name: SonarQube Scan
