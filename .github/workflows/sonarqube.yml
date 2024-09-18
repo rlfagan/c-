@@ -23,9 +23,17 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '17'
-        distribution: 'temurin'  # Choose the Java distribution (e.g., 'temurin', 'zulu', etc.)
+        distribution: 'temurin'
 
-    # Step 3: Install SonarScanner and run the scan
+    # Step 3: Install SonarScanner
+    - name: Install SonarScanner
+      run: |
+        curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+        unzip sonar-scanner.zip
+        mv sonar-scanner-4.7.0.2747-linux sonar-scanner
+        export PATH="$PATH:/github/workspace/sonar-scanner/bin"
+
+    # Step 4: Run SonarQube scan
     - name: SonarQube Scan
       env:
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
